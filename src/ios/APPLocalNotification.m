@@ -700,8 +700,10 @@
         content.title = [NSString localizedUserNotificationStringForKey:notification.alertTitle arguments:nil];
         content.body = [NSString localizedUserNotificationStringForKey:notification.alertBody
                                                          arguments:nil];
-        content.sound = [UNNotificationSound defaultSound];
-
+        NSString *customSound = [NSString localizedUserNotificationStringForKey:notification.soundName arguments:nil];
+        if (customSound !=nil) {
+            content.sound = [UNNotificationSound soundNamed:customSound];
+        }
         
         NSDate *fireDate = notification.fireDate;
         if(fireDate==nil) {
